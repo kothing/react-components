@@ -1,0 +1,159 @@
+.react-audio-player-wrap {
+  margin: 10px;
+}
+
+.audio-controller {
+  position: relative;
+  min-width: 485px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+  justify-content: space-between;
+  -ms-flex-align: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #f0f0f0;
+  border-radius: 6px;
+  background-color: #fff;
+  -webkit-box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.07);
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.07);
+}
+
+.audio-controller .audio-play-box {
+  width: 10%;
+  min-width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.audio-controller .audio-play-box .audio-play {
+  cursor: pointer;
+  height: 24px;
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+}
+
+/* 播放进度 */
+.audio-controller .audio-progress {
+  display: block;
+  position: relative;
+  width: 63%;
+  min-width: 200px;
+  position: relative;
+  height: auto;
+}
+.audio-controller .audio-progress .audio-progress-bar-bg {
+  width: calc(100% - 100px);
+  background: #ddd;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.audio-controller .audio-progress .audio-progress-bar {
+  position: relative;
+  width: 0;
+  max-width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  cursor: pointer;
+  background: #44bfa3;
+  text-align: right;
+  overflow: visible;
+  z-index: 1;
+}
+.audio-controller .audio-progress .audio-progress-bar i {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  border-radius: 50%;
+  background: #44bfa3;
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.32);
+}
+.audio-controller .audio-progress .audio-progress-range {
+  width: calc(100% - 100px);
+  cursor: pointer;
+  margin: 0;
+  position: absolute;
+  top: -7px;
+  left: 0;
+  opacity: 0;
+  z-index: 2;
+}
+.audio-controller .audio-progress .audio-currentTime {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+}
+.audio-controller .audio-progress .audio-totalTime {
+  position: absolute;
+  top: -8px;
+  right: 0;
+}
+
+/* 音量 */
+.audio-controller .audio-volume {
+  display: block;
+  position: relative;
+  width: 20%;
+  min-width: 130px;
+  margin-right: 10px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+.audio-controller .audio-volume .audio-volume-bar-bg {
+  width: calc(100% - 40px);
+  background: #ddd;
+  border-radius: 3px;
+  cursor: pointer;
+  z-index: 1;
+}
+.audio-controller .audio-volume .audio-volume-bar {
+  position: relative;
+  width: 0;
+  max-width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  cursor: pointer;
+  background: #44bfa3;
+  text-align: right;
+  overflow: visible;
+}
+.audio-controller .audio-volume .audio-volume-bar i {
+  position: absolute;
+  top: -6px;
+  right: -9px;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  border-radius: 50%;
+  background: #44bfa3;
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.32);
+}
+
+.audio-controller .audio-volume .audio-volume-range {
+  width: calc(100% - 36px);
+  min-width: 80px;
+  cursor: pointer;
+  margin: 0;
+  position: absolute;
+  top: 2px;
+  left: 36px;
+  opacity: 0;
+  z-index: 2;
+}
+
+.audio-controller .audio-volume .audio-volume-icon {
+  font-size: 0;
+  margin-right: 10px;
+}
