@@ -1,75 +1,127 @@
-# Modal
-A React modal with animations.  
-React动画特效弹框组件
+# react-modal
+
+Accessible modal dialog component for React.JS
+
+[![Build Status](https://travis-ci.org/reactjs/react-modal.svg?branch=v1)](https://travis-ci.org/reactjs/react-modal)
+[![Coverage Status](https://coveralls.io/repos/github/reactjs/react-modal/badge.svg?branch=master)](https://coveralls.io/github/reactjs/react-modal?branch=master)
+![gzip size](http://img.badgesize.io/https://unpkg.com/react-modal/dist/react-modal.min.js?compression=gzip)
+[![Join the chat at https://gitter.im/react-modal/Lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/react-modal/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+## Table of Contents
+
+* [Installation](#installation)
+* [API documentation](#api-documentation)
+* [Examples](#examples)
+* [Demos](#demos)
+
+## Installation
+
+To install, you can use [npm](https://npmjs.org/) or [yarn](https://yarnpkg.com):
 
 
-## Usage 使用
-``` javascript
+    $ npm install react-modal
+    $ yarn add react-modal
+
+
+## API documentation
+
+The primary documentation for react-modal is the
+[reference book](https://reactjs.github.io/react-modal), which describes the API
+and gives examples of its usage.
+
+## Examples
+
+Here is a simple example of react-modal being used in an app with some custom
+styles and focusable input elements within the modal content:
+
+```jsx
 import React from 'react';
-import Modal from 'modal';
+import ReactDOM from 'react-dom';
+import Modal from 'react-modal';
 
-// include styles
-import './modal.css';
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
+
+// Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
+Modal.setAppElement('#yourAppElement')
 
 class App extends React.Component {
+  constructor() {
+    super();
 
-    constructor(props) {
-        super(props);
-        this.state = { visible: false };
-    }
+    this.state = {
+      modalIsOpen: false
+    };
 
-    showModal() {
-        this.setState({ visible: true });
-    }
+    this.openModal = this.openModal.bind(this);
+    this.afterOpenModal = this.afterOpenModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
 
-    hideModal() {
-        this.setState({ visible: false });
-    }
+  openModal() {
+    this.setState({modalIsOpen: true});
+  }
 
-    render() {
-        return (
-            <div>
-                <button onClick={this.showModal.bind(this)}>show</button>
+  afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    this.subtitle.style.color = '#f00';
+  }
 
-                <Modal visible={this.state.visible} onClose={this.hideModal.bind(this)}>
-                    <div>Content</div>
-                </Modal>
-            </div>
-        )
-    }
+  closeModal() {
+    this.setState({modalIsOpen: false});
+  }
+
+  render() {
+    return (
+      <div>
+        <button onClick={this.openModal}>Open Modal</button>
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onAfterOpen={this.afterOpenModal}
+          onRequestClose={this.closeModal}
+          style={customStyles}
+          contentLabel="Example Modal"
+        >
+
+          <h2 ref={subtitle => this.subtitle = subtitle}>Hello</h2>
+          <button onClick={this.closeModal}>close</button>
+          <div>I am a modal</div>
+          <form>
+            <input />
+            <button>tab navigation</button>
+            <button>stays</button>
+            <button>inside</button>
+            <button>the modal</button>
+          </form>
+        </Modal>
+      </div>
+    );
+  }
 }
+
+ReactDOM.render(<App />, appElement);
 ```
 
-## Props 属性
+You can find more examples in the `examples` directory, which you can run in a
+local development server using `npm start` or `yarn run start`.
 
-Property|Type|Default|Description
----|---|---|---
-width|number|400|弹框宽度
-measure|string|px|测定的高和宽
-onClose|func|/|弹框关闭后的回调函数
-onAnimationEnd|func|/|动画结束后的回调函数
-visible|bool|false|是否显示对话框
-showMask|bool|true|是否显示蒙层
-closeOnEsc|bool|false|按ESC键是否关闭弹框
-closeMaskOnClick|bool|true|点击蒙层Mask是否关闭弹框
-showCloseIcon|bool|true|是否显示关闭按钮
-showModalHeader|bool|true|是否显示页眉标题
-showModalFooter|bool|true|是否显示页脚按钮
-animation|string|zoom|动画类型
-enterAnimation|string|/|显示弹框时的动画类型(优先级高于'animation')
-leaveAnimation|string|/|隐藏弹框时的动画类型(优先级高于'animation')
-duration|number|300|动画停留时间
-className|string|/|弹框的容器类名
-customStyles|object|/|自定义样式
-customMaskStyles|object|/|自定义蒙层样式
+## Demos
 
-## Animation Types 动画类型
-* zoom
-* fade
-* flip
-* door
-* rotate
-* slideUp
-* slideDown
-* slideLeft
-* slideRight
+There are several demos hosted on [CodePen](https://codepen.io) which
+demonstrate various features of react-modal:
+
+* [Minimal example](https://codepen.io/claydiffrient/pen/KNxgav)
+* [Using setAppElement](https://codepen.io/claydiffrient/pen/ENegGJ)
+* [Using onRequestClose](https://codepen.io/claydiffrient/pen/KNjVBx)
+* [Using shouldCloseOnOverlayClick](https://codepen.io/claydiffrient/pen/woLzwo)
+* [Using inline styles](https://codepen.io/claydiffrient/pen/ZBmyKz)
+* [Using CSS classes for styling](https://codepen.io/claydiffrient/pen/KNjVrG)
+* [Customizing the default styles](https://codepen.io/claydiffrient/pen/pNXgqQ)
