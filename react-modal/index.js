@@ -1,8 +1,3 @@
-/**
- * Modal Component
- * @author Missra
- */
-
-import Modal from './modal';
+import Modal from "./components/Modal";
 
 export default Modal;
