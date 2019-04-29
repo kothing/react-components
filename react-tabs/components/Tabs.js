@@ -8,8 +8,6 @@ import {
 import UncontrolledTabs from './UncontrolledTabs';
 import { getTabsCount } from '../helpers/count';
 
-import './tabs.less';
-
 const MODE_CONTROLLED = 0;
 const MODE_UNCONTROLLED = 1;
 
