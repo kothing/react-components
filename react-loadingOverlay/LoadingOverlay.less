@@ -1,0 +1,142 @@
+.loading-mask {
+  position: fixed;
+  overflow: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  transition: opacity 300ms ease;
+  -webkit-transition: opacity 300ms ease;
+  z-index: 1000;
+}
+
+.loading-overlay {
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  height: 100%;
+  position: absolute;
+  overflow: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  outline: 0;
+  z-index: 1000;
+
+  .loading-box {
+    min-width: 180px;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    box-shadow: 0 4px 15px 0 rgba(31,56,88,.15);
+    background: #fff;
+    z-index: 1500;
+
+    .loading-icon {
+      -webkit-animation: loading 2s infinite linear;
+      animation: loading 2s infinite linear;
+    }
+
+    &.small {
+      padding: 20px 35px;
+      .loading-icon,
+      .success-icon,
+      .info-icon,
+      .error-icon {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    &.middle {
+      padding: 30px 45px;
+      .loading-icon,
+      .success-icon,
+      .info-icon,
+      .error-icon {
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+    &.large {
+      padding: 35px 50px;
+      .loading-icon,
+      .success-icon,
+      .info-icon,
+      .error-icon {
+        width: 48px;
+        height: 48px;
+      }
+    }
+    
+    .loading-svg-new {
+      width: 36px;
+      height: 36px;
+      background: url(https://g.alicdn.com/uxcore/pic/loading.svg) center no-repeat;
+      background-size: contain;
+    }
+
+    .loading-text {
+      padding-left: 12px;
+    }
+  }
+}
+.close {
+  line-height: 12px;
+  text-align: center;
+  cursor: pointer;
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  z-index: 1500;
+  .icon {
+    width: 12px;
+    height: 12px;
+  }
+  &.dark {
+    .icon {
+      fill: #fff;
+    }
+  }
+  &.light {
+    .icon {
+      fill: #666;
+    }
+  }
+}
+
+@-webkit-keyframes loading {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loading {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
