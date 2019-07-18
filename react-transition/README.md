@@ -19,6 +19,7 @@ reactKey|/|```{string}```|React's key of the element.
 transitionOnMount|false|```{bool}```|Run the enter animation when the component mounts, if it is initially shown.
 unmountOnHide|false|```{bool}```|Unmount the component (remove it from the DOM) when it is not shown.
 visible|true|```{bool}```|Show the component; triggers the enter or exit animation.
+
 ---------------------------
 
 ## Transition.Group
