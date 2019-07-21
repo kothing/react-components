@@ -1,0 +1,46 @@
+.tree-transfer {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	height: 100%;
+	.tree-transfer-middle {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-start;
+		margin: 0 8px;
+		.transfer-btn {
+			margin-bottom: 8px;
+			min-width: 52px;
+		}
+	}
+	.tree-transfer-container {
+		width: 250px;
+		height: 100%;
+		border: 1px solid #d9d9d9;
+		border-radius: 4px;
+		.tree-title {
+			padding: 6px 12px;
+			border-bottom: 1px solid #d9d9d9;
+		}
+		.tree-container {
+			position: relative;
+			height: 100%;
+			height: 100%;
+			width: 100%;
+			.tree-search {
+				width: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				padding: 10px 10px 0 10px;
+			}
+			.ant-tree {
+				height: 100%;
+				width: 100%;
+				padding: 0 8px 8px 8px;
+				overflow: auto;
+			}
+		}
+	}
+}
