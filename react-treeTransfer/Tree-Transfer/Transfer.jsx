@@ -219,22 +219,22 @@ Transfer.defaultProps = {
         {
             key: 'allToRight',
             name: '>>',
-            className: ''
+            className: 'all-to-right'
         },
         {
             key: 'toRight',
             name: '>',
-            className: ''
+            className: 'to-right'
         },
         {
             key: 'toLeft',
             name: '<',
-            className: ''
+            className: 'to-left'
         },
         {
             key: 'allToLeft',
             name: '<<',
-            className: ''
+            className: 'all-to-left'
         }
     ]
 };
