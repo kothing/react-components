@@ -1,20 +1,10 @@
-.tree-transfer {
+.tree-transfer-container {
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
 	height: 100%;
-	.tree-transfer-middle {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: flex-start;
-		margin: 0 8px;
-		.transfer-btn {
-			margin-bottom: 8px;
-			min-width: 52px;
-		}
-	}
-	.tree-transfer-container {
+	.tree-transfer-left,
+	.tree-transfer-right {
 		width: 250px;
 		height: 100%;
 		border: 1px solid #d9d9d9;
@@ -41,6 +31,17 @@
 				padding: 0 8px 8px 8px;
 				overflow: auto;
 			}
+		}
+	}
+	.tree-transfer-middle {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-start;
+		margin: 0 8px;
+		.transfer-btn {
+			margin-bottom: 8px;
+			min-width: 52px;
 		}
 	}
 }
