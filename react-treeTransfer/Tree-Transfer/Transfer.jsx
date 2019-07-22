@@ -19,17 +19,6 @@ class Transfer extends Component {
     }
 
 	/**
-	 * 创建Ref
-     * @param {String} ref
-	 */
-	createRef = (ref) => {
-		const _this = this;
-		return (node) => {
-			_this[ref] = node;
-		};
-	};
-	
-	/**
 	 * 设置选中值
      * @param {Array} array
      * @param {String} key 
@@ -136,35 +125,17 @@ class Transfer extends Component {
         });
     };
 
-	/**
-	 * 获取树Tree结构值
-	 */
-    getTreeData = () => {
-        let {leftTreeData, rightTreeData} = this.state;
-        return {
-            leftTreeData: leftTreeData,
-            rightTreeData: rightTreeData
-        }
-    }
-
-	/**
-	 * 渲染组件
-	 */
     render() {
         let { leftTitle, rightTitle, treeWidth, treeHeight, showSearch, searchPlaceholder, transferBtns } = this.props;
         let { leftTreeData, leftCheckedKeys, rightTreeData, rightCheckedKeys } = this.state;
         let leftTreeArray = convertTreeToArray(leftTreeData);
         let rightTreeArray = convertTreeToArray(rightTreeData);
         return (
-            <div
-                ref={this.createRef('treeTransfer')}
-                className="tree-transfer-container" 
-                style={{ "height": treeHeight }}
-            >
+            <div className="tree-transfer-container" style={{ "height": treeHeight }}>
                 <div className="tree-transfer-left" style={{ "width": treeWidth }} >
                     {leftTitle.length > 0 ? <div className='tree-title'>{leftTitle}</div> : null}
                     <Tree
-                        style={{ "height": `${leftTitle.length > 0 ? 'calc(100% - 34px)' : '100%'}`, "paddingTop": `${showSearch ? '45px' : '0px'}` }}
+                        style={{ "height": `${leftTitle.length > 0 ? `calc(100% - 34px - ${showSearch ? '46px' : '0px'})` : `calc(100% - ${showSearch ? '46px' : '0px'})`}`, "marginTop": `${showSearch ? '46px' : '0px'}` }}
                         treeData={leftTreeData}
                         arrayData={leftTreeArray}
                         onCheck={(checkedKeys) => this.handleSetCheckedKey(checkedKeys,'left')}
