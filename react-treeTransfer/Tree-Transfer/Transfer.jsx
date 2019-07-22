@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Tree from './Trees';
 import './transfer.less';
 
-import { convertTreeToArray, convertArrayToTree, getParentNodeData, makeKVArray, mergeArrayData } from './util/MakeTreeData';
+import { convertTreeToArray, convertArrayToTree, getParentKeysArray, makeKVArray, mergeArrayData } from './util/MakeTreeData';
 
 class Transfer extends Component {
     constructor(props) {
@@ -57,25 +57,25 @@ class Transfer extends Component {
         switch(key) {
             case 'allToRight':
                 sourceArray = _.cloneDeep(leftArrayData);
-                checkedKeys = _.cloneDeep(leftArrayData);
+                checkedKeys = _.cloneDeep(leftArrayData.map(item => item.key));
                 targetArray = _.cloneDeep(rightArrayData);
                 break;
 
             case 'toRight':
                 sourceArray = _.cloneDeep(leftArrayData);
-                checkedKeys = makeKVArray(leftCheckedKeys);
+                checkedKeys = _.cloneDeep(leftCheckedKeys);
                 targetArray = _.cloneDeep(rightArrayData);
                 break;
 
             case 'toLeft':
                 sourceArray = _.cloneDeep(rightArrayData);
-                checkedKeys = makeKVArray(rightCheckedKeys);
+                checkedKeys = _.cloneDeep(rightCheckedKeys);
                 targetArray = _.cloneDeep(leftArrayData);
                 break;
 
             case 'allToLeft':
                 sourceArray = _.cloneDeep(rightArrayData);
-                checkedKeys = _.cloneDeep(rightArrayData);
+                checkedKeys = _.cloneDeep(rightArrayData.map(item => item.key));
                 targetArray = _.cloneDeep(leftArrayData);
                 break;
             
@@ -83,15 +83,13 @@ class Transfer extends Component {
                 break;
         }
         
-        let restArray = _.pullAllBy(_.cloneDeep(sourceArray), checkedKeys, 'key');
-        let reverseArray = _.pullAllBy(_.cloneDeep(sourceArray), restArray, 'key');
-        let checkedParents = getParentNodeData(mergeArrayData(_.cloneDeep(sourceArray), _.cloneDeep(targetArray)), reverseArray);
-        let checkedArray = mergeArrayData(checkedParents, reverseArray);
-        let newArray = mergeArrayData(targetArray, checkedArray);
+        let allArray = mergeArrayData(sourceArray, targetArray);
+        sourceArray = _.pullAllBy(_.cloneDeep(sourceArray), makeKVArray(checkedKeys), 'key');
+        targetArray = mergeArrayData(getParentKeysArray(allArray, checkedKeys), targetArray);
 
         return {
-            sourceData: restArray,
-            targetData: newArray
+            sourceData: sourceArray,
+            targetData: targetArray
         };
     };
 

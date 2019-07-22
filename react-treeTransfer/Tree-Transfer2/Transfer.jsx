@@ -57,7 +57,6 @@ class Transfer extends Component {
         let {leftTreeData, rightTreeData, leftCheckedKeys, rightCheckedKeys} = this.state;
         let leftArrayData = convertTreeToArray(leftTreeData);
         let rightArrayData = convertTreeToArray(rightTreeData);
-
         let sourceArray = [];
         let checkedKeys = [];
         let targetArray = [];

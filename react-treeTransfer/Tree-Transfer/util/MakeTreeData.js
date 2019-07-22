@@ -11,9 +11,9 @@ export const convertTreeToArray = (treeData) => {
 		data.forEach(item => {
 			let copyItem = _.cloneDeep(item);
 			delete copyItem.children;
-			if(parentKey) copyItem.parentKey = parentKey;
+			if (parentKey) copyItem.parentKey = parentKey;
 			dataArray.push(copyItem);
-			if(item.children) {
+			if (item.children) {
 				let parent2Key = item.key;
 				recursion(item.children, parent2Key);
 			}
@@ -34,25 +34,6 @@ export const convertArrayToTree = (dataArray) => {
 	return treeData;
 }
 
-
-/**
- * 获取所有父节点以及属性
- * @param {Array} dataArray 
- */
-export const getParentNodeData = (allArray = [], dataArray = []) => {
-	let parentArray = [];
-	parentArray = allArray.filter(item => {
-		let isPraent = false;
-		for(let i = 0; i < dataArray.length; i++) {
-			if(dataArray[i].parentKey === item.key) {
-				isPraent = true;
-				break;
-			}
-		}
-		return isPraent;
-	});
-	return parentArray;
-}
 
 /**
  * 将树形平铺数据进行分离整理
@@ -130,6 +111,35 @@ const mergeTreeData = ({
 	let andData = makeTreeArray(treeArray)(makeTreeObject(treeObj))
 	return _.sortBy(andData, itn => itn.key);
 };
+
+
+/**
+ * 获取CheckedKeys的父级Keys
+ * @param {Array} arry 所有Tree的平铺Array 
+ * @param {Array} keys 被选中key的Array
+ * @returns {Array} 被选中key的父Array
+ */
+export const getParentKeysArray = (arry = [], keys = []) => {
+	let parentObjs = [];
+	const getParentKey = (key) => {
+		let parentObj;
+		let arr = _.cloneDeep(arry);
+		for(let i = 0; i < arr.length; i++) {
+			if(arr[i].key === key) {
+				parentObj = arr[i];
+				break;
+			}
+		}
+		if(parentObj) {
+			parentObjs.push(parentObj);
+			if(parentObj.parentKey) getParentKey(parentObj.parentKey);
+		}
+	}
+	keys.forEach(item => {
+		getParentKey(item);
+	});
+	return _.uniq(parentObjs);
+}
 
 
 /**

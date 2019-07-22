@@ -37,7 +37,9 @@ export const convertArrayToTree = (dataArray) => {
 
 /**
  * 获取所有父节点以及属性
- * @param {Array} dataArray 
+ * @param {Array} allArray 所有Array 
+ * @param {Array} dataArray 比指定查找其父节点的Array
+ * @returns {Array} 返回指定Array的父节点
  */
 export const getParentNodeData = (allArray = [], dataArray = []) => {
 	let parentArray = [];
@@ -134,9 +136,10 @@ const mergeTreeData = ({
 
 /**
  * 获取CheckedKeys的父级Keys
- * @param {Array} array
+ * @param {Array} arry 所有Tree的平铺Array 
+ * @param {Array} keys 被选中key的Array
+ * @returns {Array} 被选中key的父Array
  */
-
 export const getParentKeysArray = (arry = [], keys = []) => {
 	let parentKeys = [];
 	const getParentKey = (key) => {
