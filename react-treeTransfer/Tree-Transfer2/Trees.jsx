@@ -28,12 +28,22 @@ class Trees extends React.Component {
 			autoExpandParent: true
 		};
 	}
+
+	//创建Ref
+	createRef = (ref) => {
+		const _this = this;
+		return (node) => {
+			_this[ref] = node;
+		};
+	};
+
 	onExpand = (expandedKeys) => {
 		this.setState({
 			expandedKeys,
 			autoExpandParent: false
 		});
 	};
+
 	onChange = (e) => {
 		const value = e.target.value;
 		let expandedKeys;
@@ -57,6 +67,7 @@ class Trees extends React.Component {
 			autoExpandParent: true
 		});
 	};
+
 	render() {
 		const { searchValue, expandedKeys, autoExpandParent } = this.state;
 		let { onCheck, showSearch, placeholder, checkedKeys } = this.props;
@@ -85,6 +96,7 @@ class Trees extends React.Component {
 				}
 				return <TreeNode key={item.key} disabled={item.disabled} title={title} />;
 			});
+			
 		return (
 			<div style={this.props.style} className='tree-container'>
 				{
