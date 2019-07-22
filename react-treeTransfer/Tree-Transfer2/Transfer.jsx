@@ -118,14 +118,16 @@ class Transfer extends Component {
 	 * @param {Array} btns
 	 */
     createBtns = (btns) => {
+	    let {leftCheckedKeys, rightCheckedKeys} = this.state;
         return btns.map((item, index) => {
             let {
                 name,
                 className,
                 key
             } = item;
+			let enable = ( key === 'toRight' && leftCheckedKeys.length > 0) || ( key === 'toLeft' && rightCheckedKeys.length > 0) ? 'enable' : '';
             return (
-                <Button key={key} className={`transfer-btn ${className}`} onClick={this.handleTransClick.bind(this, key)} >
+                <Button key={key} className={`transfer-btn ${className} ${enable}`} onClick={this.handleTransClick.bind(this, key)} >
                     {name}
                 </Button>
             );
