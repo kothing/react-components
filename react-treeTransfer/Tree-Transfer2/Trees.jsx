@@ -43,6 +43,7 @@ class Trees extends React.Component {
 			expandedKeys = this.props.arrayData
 				.map((item) => {
 					const titleText = `${item.title}`;
+					console.log(titleText.indexOf(value) > -1);
 					if (titleText.indexOf(value) > -1) {
 						return getParentKey(item.key, this.props.arrayData);
 					}
@@ -91,16 +92,18 @@ class Trees extends React.Component {
 						<Search placeholder={placeholder} onChange={this.onChange.bind(this)} />
 					</div> : null
 				}
-				<Tree
-					checkable={true}
-					onExpand={this.onExpand.bind(this)}
-					onCheck={onCheck}
-					checkedKeys={checkedKeys}
-					expandedKeys={expandedKeys}
-					autoExpandParent={autoExpandParent}
-				>
-					{loop(this.props.treeData)}
-				</Tree>
+				<div className="tree-list" style={this.props.style}>
+					<Tree
+						checkable={true}
+						onExpand={this.onExpand.bind(this)}
+						onCheck={onCheck}
+						checkedKeys={checkedKeys}
+						expandedKeys={expandedKeys}
+						autoExpandParent={autoExpandParent}
+					>
+						{loop(this.props.treeData)}
+					</Tree>
+				</div>
 			</div>
 		);
 	}
