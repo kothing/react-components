@@ -185,7 +185,7 @@ class Transfer extends Component {
                 <div className="tree-transfer-right" style={{ "width": treeWidth }}>
                     {rightTitle.length > 0 ? <div className='tree-title'>{rightTitle}</div> : null}
                     <Tree
-                        style={{ "height": `${leftTitle.length > 0 ? `calc(100% - 34px - ${showSearch ? '45px' : '0px'})` : `calc(100% - ${showSearch ? '45px' : '0px'})`}`, "marginTop": `${showSearch ? '45px' : '0px'}` }}
+                        style={{ "height": `${leftTitle.length > 0 ? `calc(100% - 34px - ${showSearch ? '46px' : '0px'})` : `calc(100% - ${showSearch ? '46px' : '0px'})`}`, "marginTop": `${showSearch ? '46px' : '0px'}` }}
                         treeData={rightTreeData}
                         arrayData={rightTreeArray}
                         onCheck={(checkedKeys) => this.handleSetCheckedKey(checkedKeys,'right')}
