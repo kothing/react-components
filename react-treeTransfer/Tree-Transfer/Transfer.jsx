@@ -19,6 +19,17 @@ class Transfer extends Component {
     }
 
 	/**
+	 * 创建Ref
+     * @param {String} ref
+	 */
+	createRef = (ref) => {
+		const _this = this;
+		return (node) => {
+			_this[ref] = node;
+		};
+	};
+	
+	/**
 	 * 设置选中值
      * @param {Array} array
      * @param {String} key 
