@@ -1,0 +1,74 @@
+button {
+    font-family: sans-serif;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0;
+    overflow: visible;
+    text-transform: none
+}
+
+[type=reset],
+[type=submit],
+button,
+html [type=button] {
+    -webkit-appearance: button
+}
+
+[type=button]::-moz-focus-inner,
+[type=reset]::-moz-focus-inner,
+[type=submit]::-moz-focus-inner,
+button::-moz-focus-inner {
+    border-style: none;
+    padding: 0
+}
+
+[type=button]:-moz-focusring,
+[type=reset]:-moz-focusring,
+[type=submit]:-moz-focusring,
+button:-moz-focusring {
+    outline: 1px dotted ButtonText
+}
+
+.x-button {
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+    font-weight: 300;
+    text-align: center;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    border: 1px solid transparent;
+    background-image: none;
+    vertical-align: middle;
+    white-space: nowrap;
+    transition: all .2s ease-in;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 18px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline: 0;
+}
+
+.x-button-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+
+.x-button-primary {
+    background-color: #00b0ff;
+    border-color: #00b0ff;
+    color: #fff;
+}
+
+.x-button-outline {
+    background-color: #fff;
+    border-color: #00b0ff;
+    color: #333;
+}
