@@ -26,6 +26,17 @@ class Transfer extends Component {
     }
 
 	/**
+	 * 创建Ref
+     * @param {String} ref
+	 */
+	createRef = (ref) => {
+		const _this = this;
+		return (node) => {
+			_this[ref] = node;
+		};
+	};
+	
+	/**
 	 * 设置选中值
      * @param {Array} array
      * @param {String} key 
@@ -138,7 +149,11 @@ class Transfer extends Component {
         let leftTreeArray = convertTreeToArray(leftTreeData);
         let rightTreeArray = convertTreeToArray(rightTreeData);
         return (
-            <div className="tree-transfer" style={{ "height": treeHeight }}>
+            <div
+                ref={this.createRef('treeTransfer')}
+                className="tree-transfer" 
+                style={{ "height": treeHeight }}
+            >
                 <div className="tree-transfer-container" style={{ "width": treeWidth }} >
                     {leftTitle.length > 0 ? <div className='tree-title'>{leftTitle}</div> : null}
                     <Tree
