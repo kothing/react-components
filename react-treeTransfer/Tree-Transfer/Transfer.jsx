@@ -127,6 +127,17 @@ class Transfer extends Component {
         });
     };
 
+	/**
+	 * 获取树Tree结构值
+	 */
+    getTreeData = () => {
+        let {leftTreeData, rightTreeData} = this.state;
+        return {
+            leftTreeData: leftTreeData,
+            rightTreeData: rightTreeData
+        }
+    }
+
     render() {
         let { leftTitle, rightTitle, treeWidth, treeHeight, showSearch, searchPlaceholder, transferBtns } = this.props;
         let { leftTreeData, leftCheckedKeys, rightTreeData, rightCheckedKeys } = this.state;
