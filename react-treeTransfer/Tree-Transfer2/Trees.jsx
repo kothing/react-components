@@ -43,7 +43,6 @@ class Trees extends React.Component {
 			expandedKeys = this.props.arrayData
 				.map((item) => {
 					const titleText = `${item.title}`;
-					console.log(titleText.indexOf(value) > -1);
 					if (titleText.indexOf(value) > -1) {
 						return getParentKey(item.key, this.props.arrayData);
 					}
