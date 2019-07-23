@@ -98,13 +98,13 @@ class Trees extends React.Component {
 			});
 			
 		return (
-			<div className='tree-container'>
+			<div className='tree-container' style={this.props.style}>
 				{
 					showSearch ? <div className='tree-search'>
 						<Search placeholder={placeholder} onChange={this.onChange.bind(this)} />
 					</div> : null
 				}
-				<div className="tree-list" style={this.props.style}>
+				<div className="tree-list" style={{height: `${showSearch ? `calc(100% - 46px)` : '100%'}`, marginTop: `${showSearch ? '46px' : '0'}`}}>
 					<Tree
 						checkable={true}
 						onExpand={this.onExpand.bind(this)}
