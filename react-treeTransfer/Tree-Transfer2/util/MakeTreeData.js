@@ -227,6 +227,16 @@ export const makeArrayKeysEnabled = (array = [], keys = []) => {
 	});
 }
 
+/**
+ * 把一维数组转成 对象名为key 对象值是原对象的格式
+ */
+const makeByKeyObj = (array) => {
+	let obj = {};
+	array.forEach(item => {
+		obj[item.key] = item;
+	});
+	return obj;
+};
 
 /**
  * 数组合并去重
@@ -235,4 +245,18 @@ export const makeArrayKeysEnabled = (array = [], keys = []) => {
  */
 export const mergeArrayData = (array1, array2) => {
 	return _.uniqWith(array1.concat(array2), _.isEqual);
+}
+
+
+/**
+ * 数组去重
+ * @param {Array} array
+ */
+export const makeArrayUniq = (array) => {
+	let keysObj = makeByKeyObj(array);
+	let newArray = [];
+	for(let key in keysObj) {
+		newArray.push(keysObj[key]);
+	}
+	return newArray
 }
