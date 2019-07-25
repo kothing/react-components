@@ -159,3 +159,17 @@ export const makeKVArray = (array = []) => {
 export const mergeArrayData = (array1, array2) => {
 	return _.uniqWith(array1.concat(array2), _.isEqual);
 }
+
+
+/**
+ * 数组去重
+ * @param {Array} array
+ */
+export const makeArrayUniq = (array) => {
+	let keysObj = makeByKeyObj(array);
+	let newArray = [];
+	for(let key in keysObj) {
+		newArray.push(keysObj[key]);
+	}
+	return newArray
+}
