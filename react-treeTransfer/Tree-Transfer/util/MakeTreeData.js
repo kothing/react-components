@@ -152,6 +152,18 @@ export const makeKVArray = (array = []) => {
 
 
 /**
+ * 把一维数组转成 对象名为key 对象值是原对象的格式
+ */
+const makeByKeyObj = (array) => {
+	let obj = {};
+	array.forEach(item => {
+		obj[item.key] = item;
+	});
+	return obj;
+};
+
+
+/**
  * 数组合并去重
  * @param {Array} array1 
  * @param {Array} array2 
