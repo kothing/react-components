@@ -114,31 +114,70 @@ const mergeTreeData = ({
 
 
 /**
- * 获取CheckedKeys的父级Keys
- * @param {Array} arry 所有Tree的平铺Array 
- * @param {Array} keys 被选中key的Array
- * @returns {Array} 被选中key的父Array
+ * 获取key的父级Key
+ * @param {String} key 指定key
+ * @param {Array} keys 指定key所在的Tree平铺Array
+ * @returns {String} key的父级Key
  */
-export const getParentKeysArray = (arry = [], keys = []) => {
-	let parentObjs = [];
-	const getParentKey = (key) => {
-		let parentObj;
-		let arr = _.cloneDeep(arry);
-		for(let i = 0; i < arr.length; i++) {
-			if(arr[i].key === key) {
-				parentObj = arr[i];
+export const getParentKey = (key = '', array = []) => {
+	let parentKey = '';
+	for(let i = 0; i < array.length; i++) {
+		if(key === array[i].key) {
+			parentKey = array[i].parentKey ? array[i].parentKey : array[i].key;
+		}
+	}
+	return parentKey;
+}
+
+
+/**
+ * 获取key的父级Key
+ * @param {String} key 指定key
+ * @param {Array} keys 指定key所在的Tree平铺Array
+ * @returns {String} key的父级Key
+ */
+export const getParentKeyArray = (keys = [], array = []) => {
+	let parentKeys = [];
+	const loop = (key) => {
+		for(let i = 0; i < array.length; i++) {
+			if(array[i].key === key) {
+				parentKeys.push(key);
+				if(array[i].parentKey) {
+					parentKeys.push(array[i].parentKey);
+					loop(array[i].parentKey)
+				}
 				break;
 			}
 		}
-		if(parentObj) {
-			parentObjs.push(parentObj);
-			if(parentObj.parentKey) getParentKey(parentObj.parentKey);
+	}
+	keys.forEach(item => {
+		loop(item);
+	});
+	return _.uniq(parentKeys);
+}
+
+
+/**
+ * 获取Keys的父级对象Keys
+ * @param {Array} array 所有Tree的平铺对象Array 
+ * @param {Array} keys 被选中key的Array
+ * @returns {Array} 被选中key的父级对象Array
+ */
+export const getParentKeyArrayObj = (keys = [], array = []) => {
+	let parentArray = [];
+	const loop = (key) => {
+		for(let i = 0; i < array.length; i++) {
+			if(array[i].key === key) {
+				parentArray.push(array[i]);
+				if(array[i].parentKey) loop(array[i].parentKey);
+				break;
+			}
 		}
 	}
 	keys.forEach(item => {
-		getParentKey(item);
+		loop(item);
 	});
-	return _.uniq(parentObjs);
+	return _.uniq(parentArray);
 }
 
 
@@ -164,24 +203,24 @@ const makeByKeyObj = (array) => {
 
 
 /**
+ * 数组去重
+ * @param {Array} array
+ */
+export const makeArrayUniq = (array) => {
+	let newArray = [];
+	let keysObj = makeByKeyObj(array);
+	for(let key in keysObj) {
+		newArray.push(keysObj[key]);
+	}
+	return newArray
+}
+
+
+/**
  * 数组合并去重
  * @param {Array} array1 
  * @param {Array} array2 
  */
 export const mergeArrayData = (array1, array2) => {
-	return _.uniqWith(array1.concat(array2), _.isEqual);
-}
-
-
-/**
- * 数组去重
- * @param {Array} array
- */
-export const makeArrayUniq = (array) => {
-	let keysObj = makeByKeyObj(array);
-	let newArray = [];
-	for(let key in keysObj) {
-		newArray.push(keysObj[key]);
-	}
-	return newArray
+	return makeArrayUniq(array1.concat(array2));
 }
