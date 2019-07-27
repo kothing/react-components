@@ -78,8 +78,7 @@ class Transfer extends Component {
             let checkedKeys = key === 'allToRight' ? leftArrayData.map(item => item.key) : leftCheckedKeys;
             newLeftArrayData = _.pullAllBy(_.cloneDeep(leftArrayData), makeKVArray(checkedKeys), 'key');
             newRightArrayData = mergeArrayData(getParentKeyArrayObj(checkedKeys, allArrayData), _.cloneDeep(rightArrayData));
-            newLeftExpandedKeys = Array.from(new Set(leftExpandedKeys.concat(_this.leftTree.state.expandedKeys)))
-            
+            newLeftExpandedKeys = Array.from(new Set(leftExpandedKeys.concat(_this.leftTree.state.expandedKeys)));
             newRightExpandedKeys = getParentKeyArray(checkedKeys, newRightArrayData);
         } else if (key === 'allToLeft' || key === 'toLeft') {
             let checkedKeys = key === 'allToLeft' ? rightArrayData.map(item => item.key) : rightCheckedKeys;
