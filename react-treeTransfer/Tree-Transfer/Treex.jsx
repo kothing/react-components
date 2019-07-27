@@ -69,8 +69,8 @@ class Treex extends React.Component {
 	render() {
 		const { searchValue, expandedKeys, checkedKeys, autoExpandParent } = this.state;
 		let { showSearch, searchPlaceholder } = this.props;
-		const renderTreeNode = (data) =>
-			data.map((item) => {
+		const renderTreeNode = (treeData) =>
+			treeData.map((item) => {
 				const titleText = item.title;
 				const index = titleText.toLowerCase().indexOf(searchValue.toLowerCase());
 				const beforeStr = titleText.substr(0, index);
@@ -85,12 +85,12 @@ class Treex extends React.Component {
 				) : (<span>{titleText}</span>);
 				if (item.children) {
 					return (
-						<TreeNode key={item.key} title={title}>
+						<TreeNode key={item.key} title={title} className={item.isNew ? 'tree-li new' : 'tree-li'}>
 							{renderTreeNode(item.children)}
 						</TreeNode>
 					);
 				}
-				return <TreeNode key={item.key} title={title} />;
+				return <TreeNode key={item.key} title={title} className={item.isNew ? 'tree-li new' : 'tree-li'}/>;
 			});
 
 		return (

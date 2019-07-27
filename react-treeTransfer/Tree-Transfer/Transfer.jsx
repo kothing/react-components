@@ -3,10 +3,12 @@ import _ from 'lodash';
 import { Button } from 'antd';
 import PropTypes from 'prop-types';
 import Treex from './Treex';
+import { convertTreeToArray, convertArrayToTree, getParentKeyArray, getParentKeyArrayObj, makeKVArray, mergeArrayData, compareInitData } from './util/MakeTreeData';
 import './transfer.less';
 
-import { convertTreeToArray, convertArrayToTree, getParentKeyArray, getParentKeyArrayObj, makeKVArray, mergeArrayData } from './util/MakeTreeData';
-
+/**
+ * 组件类
+ */
 class Transfer extends Component {
     constructor(props) {
         super(props);
@@ -67,6 +69,8 @@ class Transfer extends Component {
     handleTransClick = (key) => {
         let _this = this;
         let { leftTreeDataInit, rightTreeDataInit, leftTreeData, rightTreeData, leftCheckedKeys, rightCheckedKeys, leftExpandedKeys, rightExpandedKeys } = _this.state;
+        let leftArrayDataInit = _.cloneDeep(convertTreeToArray(leftTreeDataInit));
+        let rightArrayDataInit = _.cloneDeep(convertTreeToArray(rightTreeDataInit));
         let leftArrayData = _.cloneDeep(convertTreeToArray(leftTreeData));
         let rightArrayData = _.cloneDeep(convertTreeToArray(rightTreeData));
         let allArrayData = mergeArrayData(_.cloneDeep(leftArrayData), _.cloneDeep(rightArrayData));
@@ -77,12 +81,12 @@ class Transfer extends Component {
         if (key === 'allToRight' || key === 'toRight') {
             let checkedKeys = key === 'allToRight' ? leftArrayData.map(item => item.key) : leftCheckedKeys;
             newLeftArrayData = _.pullAllBy(_.cloneDeep(leftArrayData), makeKVArray(checkedKeys), 'key');
-            newRightArrayData = mergeArrayData(getParentKeyArrayObj(checkedKeys, allArrayData), _.cloneDeep(rightArrayData));
+            newRightArrayData = compareInitData(mergeArrayData(getParentKeyArrayObj(checkedKeys, allArrayData), _.cloneDeep(rightArrayData)),  _.cloneDeep(rightArrayDataInit));
             newLeftExpandedKeys = Array.from(new Set(leftExpandedKeys.concat(_this.leftTree.state.expandedKeys)));
             newRightExpandedKeys = getParentKeyArray(checkedKeys, newRightArrayData);
         } else if (key === 'allToLeft' || key === 'toLeft') {
             let checkedKeys = key === 'allToLeft' ? rightArrayData.map(item => item.key) : rightCheckedKeys;
-            newLeftArrayData = mergeArrayData(getParentKeyArrayObj(checkedKeys, allArrayData), _.cloneDeep(leftArrayData));
+            newLeftArrayData = compareInitData(mergeArrayData(getParentKeyArrayObj(checkedKeys, allArrayData), _.cloneDeep(leftArrayData)), _.cloneDeep(leftArrayDataInit));
             newRightArrayData = _.pullAllBy(_.cloneDeep(rightArrayData), makeKVArray(checkedKeys), 'key');
             newLeftExpandedKeys = getParentKeyArray(checkedKeys, newLeftArrayData);
             newRightExpandedKeys = Array.from(new Set(rightExpandedKeys.concat(_this.rightTree.state.expandedKeys)));
@@ -113,9 +117,9 @@ class Transfer extends Component {
             return (
                 <Button
                     key={key}
-                    disabled = {key === 'allToRight' || key === 'allToLeft' || key === 'reset' || (key === 'toRight' && leftCheckedKeys.length > 0) || (key === 'toLeft' && rightCheckedKeys.length > 0) ? false : true}
-                    className={`transfer-btn ${className} ${enable}`} 
-                    onClick={key === 'allToRight' || key === 'allToLeft' || key === 'reset' || (key === 'toRight' && leftCheckedKeys.length > 0) || (key === 'toLeft' && rightCheckedKeys.length > 0) ? this.handleTransClick.bind(this, key) : () => {console.log('No check')}}
+                    disabled={key === 'allToRight' || key === 'allToLeft' || key === 'reset' || (key === 'toRight' && leftCheckedKeys.length > 0) || (key === 'toLeft' && rightCheckedKeys.length > 0) ? false : true}
+                    className={`transfer-btn ${className} ${enable}`}
+                    onClick={key === 'allToRight' || key === 'allToLeft' || key === 'reset' || (key === 'toRight' && leftCheckedKeys.length > 0) || (key === 'toLeft' && rightCheckedKeys.length > 0) ? this.handleTransClick.bind(this, key) : () => { console.log('No check') }}
                 >
                     {name}
                 </Button>
@@ -136,7 +140,7 @@ class Transfer extends Component {
 
     render() {
         let { leftTitle, rightTitle, treeWidth, treeHeight, showSearch, searchPlaceholder, transferBtns } = this.props;
-        let { leftTreeData, rightTreeData, leftCheckedKeys, rightCheckedKeys, leftExpandedKeys, rightExpandedKeys, updateFrom} = this.state;
+        let { leftTreeData, rightTreeData, leftCheckedKeys, rightCheckedKeys, leftExpandedKeys, rightExpandedKeys, updateFrom } = this.state;
         let leftTreeArray = convertTreeToArray(leftTreeData);
         let rightTreeArray = convertTreeToArray(rightTreeData);
         let treeStyle = { "height": `${leftTitle.length > 0 ? `calc(100% - 34px)` : `100%`}` };
@@ -158,7 +162,7 @@ class Transfer extends Component {
                         checkedKeys={leftCheckedKeys}
                         expandedKeys={leftExpandedKeys}
                         onCheck={(checkedKeys) => this.handleCheck(checkedKeys, 'left')}
-                        onExpand={(expandedKeys) => this.handleExpand(expandedKeys,'left')}
+                        onExpand={(expandedKeys) => this.handleExpand(expandedKeys, 'left')}
                         updateFrom={updateFrom}
                         position="left"
                     />
@@ -178,7 +182,7 @@ class Transfer extends Component {
                         checkedKeys={rightCheckedKeys}
                         expandedKeys={rightExpandedKeys}
                         onCheck={(checkedKeys) => this.handleCheck(checkedKeys, 'right')}
-                        onExpand={(expandedKeys) => this.handleExpand(expandedKeys,'right')}
+                        onExpand={(expandedKeys) => this.handleExpand(expandedKeys, 'right')}
                         updateFrom={updateFrom}
                         position="right"
                     />

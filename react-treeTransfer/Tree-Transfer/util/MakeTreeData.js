@@ -224,3 +224,23 @@ export const makeArrayUniq = (array) => {
 export const mergeArrayData = (array1, array2) => {
 	return makeArrayUniq(array1.concat(array2));
 }
+
+
+/**
+ * 和初始值比较,并添加isNew属性
+ * @param {Array} data 新数据
+ * @param {Array} initData 初始数据
+ */
+export const compareInitData = (data, initData) => {
+	return data.map(item => {
+		let isNew = true;
+		for(let i = 0; i < initData.length; i++) {
+			if(item.key === initData[i].key) {
+				isNew = false;
+				break;
+			}
+		}
+		item.isNew = isNew ? true : false;
+		return item;
+	});
+}

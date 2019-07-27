@@ -28,12 +28,36 @@
 			}
 			.tree-list {
 				overflow: auto;
+				/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+				&::-webkit-scrollbar {
+					width: 8px;
+					height: 8px;
+					background-color: #F5F5F5;
+				}
+				
+				/*定义滚动条轨道 内阴影+圆角*/
+				&::-webkit-scrollbar-track {
+					border-radius: 2px;
+					background-color: #F5F5F5;
+					display: none;
+				}
+				
+				/*定义滑块 内阴影+圆角*/
+				&::-webkit-scrollbar-thumb {
+					border-radius: 2px;
+					background-color: #ddd;
+				}
+				.tree-li.new {
+					color: #ff6f00;
+					.ant-tree-node-content-wrapper {
+						color: #ff6f00;
+					}
+				}
 			}
 			.ant-tree {
 				height: 100%;
 				width: 100%;
 				padding: 0 8px 8px 8px;
-				overflow: auto;
 			}
 		}
 	}
@@ -45,7 +69,6 @@
 		margin: 0 8px;
 		.transfer-btn {
 			margin-bottom: 8px;
-			min-width: 52px;
 		}
 	}
 }
