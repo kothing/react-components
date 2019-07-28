@@ -151,7 +151,7 @@ class Transfer extends Component {
                 style={{ "height": treeHeight }}
             >
                 <div className="tree-transfer-left" style={{ "width": treeWidth }} >
-                    {leftTitle.length > 0 ? <div className='tree-title'>{leftTitle}</div> : null}
+                    {leftTitle.length > 0 ? <div className='tree-title'>{leftTitle} <i className='tree-nums'>{leftTreeArray.length}</i></div> : null}
                     <Treex
                         ref={this.createRef('leftTree')}
                         style={treeStyle}
@@ -171,7 +171,7 @@ class Transfer extends Component {
                     {this.renderBtns(transferBtns)}
                 </div>
                 <div className="tree-transfer-right" style={{ "width": treeWidth }}>
-                    {rightTitle.length > 0 ? <div className='tree-title'>{rightTitle}</div> : null}
+                    {rightTitle.length > 0 ? <div className='tree-title'>{rightTitle} <i className='tree-nums'>{rightTreeArray.length}</i></div> : null}
                     <Treex
                         ref={this.createRef('rightTree')}
                         style={treeStyle}

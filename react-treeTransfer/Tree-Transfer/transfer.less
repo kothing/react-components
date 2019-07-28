@@ -10,8 +10,14 @@
 		border: 1px solid #d9d9d9;
 		border-radius: 4px;
 		.tree-title {
+			position: relative;
 			padding: 6px 12px;
 			border-bottom: 1px solid #d9d9d9;
+			.tree-nums {
+				position: absolute;
+				right: 10px;
+				font-size: 12px;
+			}
 		}
 		.tree-container {
 			position: relative;
@@ -48,7 +54,7 @@
 					background-color: #ddd;
 				}
 				.tree-li.new {
-					color: #ff6f00;
+					// color: #ff6f00;
 					.ant-tree-node-content-wrapper {
 						color: #ff6f00;
 					}
