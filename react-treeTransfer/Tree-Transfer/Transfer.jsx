@@ -26,6 +26,18 @@ class Transfer extends Component {
     }
 
 	/**
+	 * 接收新的Props
+	 */
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            leftTreeDataInit: nextProps.leftTreeData,
+            rightTreeDataInit: nextProps.rightTreeData,
+            leftTreeData: nextProps.leftTreeData,
+            rightTreeData: nextProps.rightTreeData
+        });
+    }	
+	
+	/**
 	 * 创建Ref
      * @param {String} ref
 	 */
