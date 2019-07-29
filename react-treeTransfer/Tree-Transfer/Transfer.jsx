@@ -29,12 +29,14 @@ class Transfer extends Component {
 	 * 接收新的Props
 	 */
     componentWillReceiveProps(nextProps) {
-        this.setState({
-            leftTreeDataInit: nextProps.leftTreeData,
-            rightTreeDataInit: nextProps.rightTreeData,
-            leftTreeData: nextProps.leftTreeData,
-            rightTreeData: nextProps.rightTreeData
-        });
+        if(!_.isEqual(this.props.leftTreeData, nextProps.leftTreeData) || !_.isEqual(this.props.rightTreeData, nextProps.rightTreeData)) {
+            this.setState({
+                leftTreeDataInit: nextProps.leftTreeData,
+                rightTreeDataInit: nextProps.rightTreeData,
+                leftTreeData: nextProps.leftTreeData,
+                rightTreeData: nextProps.rightTreeData
+            });
+        }
     }	
 	
 	/**
