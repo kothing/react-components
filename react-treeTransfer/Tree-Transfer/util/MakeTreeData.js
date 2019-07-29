@@ -71,7 +71,8 @@ const makeTreeObject = (treeObj) => {
 			const itemEl = dataObject[itemKey];
 			itemEl.map((item, i) => {
 				if (dataObject.hasOwnProperty(item.key)) {
-					item.children = _.sortBy(dataObject[item.key], itn => itn.key);
+					// item.children = _.sortBy(dataObject[item.key], itn => itn.key);
+					item.children = _.sortBy(dataObject[item.key], itn => itn.title);
 				}
 				return item;
 			});
@@ -92,7 +93,8 @@ const makeTreeArray = (treeArray) => {
 	return (treeObj) => {
 		return dataArray.map((item, index) => {
 			if (treeObj.hasOwnProperty(item.key)) {
-				item.children = _.sortBy(treeObj[item.key], itn => itn.key);
+				// item.children = _.sortBy(treeObj[item.key], itn => itn.key);
+				item.children = _.sortBy(treeObj[item.key], itn => itn.title);
 			}
 			return item;
 		});
@@ -109,7 +111,8 @@ const mergeTreeData = ({
 	treeArray
 }) => {
 	let andData = makeTreeArray(treeArray)(makeTreeObject(treeObj))
-	return _.sortBy(andData, itn => itn.key);
+	// return _.sortBy(andData, itn => itn.key);
+	return _.sortBy(andData, itn => itn.title);
 };
 
 
@@ -177,7 +180,8 @@ export const getParentKeyArrayObj = (keys = [], array = []) => {
 	keys.forEach(item => {
 		loop(item);
 	});
-	return _.uniq(parentArray);
+	// return _.uniq(parentArray);
+	return _.sortBy(_.uniq(parentArray), itn => itn.title);
 }
 
 
