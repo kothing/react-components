@@ -85,12 +85,12 @@ class Treex extends React.Component {
 				) : (<span>{titleText}</span>);
 				if (item.children) {
 					return (
-						<TreeNode key={item.key} title={title} className={item.isNew ? 'tree-li new' : 'tree-li'}>
+						<TreeNode key={item.key} title={title} disabled={item.disabled} className={item.isNew ? 'tree-li new' : 'tree-li'}>
 							{renderTreeNode(item.children)}
 						</TreeNode>
 					);
 				}
-				return <TreeNode key={item.key} title={title} className={item.isNew ? 'tree-li new' : 'tree-li'}/>;
+				return <TreeNode key={item.key} title={title} disabled={item.disabled} className={item.isNew ? 'tree-li new' : 'tree-li'}/>;
 			});
 
 		return (
