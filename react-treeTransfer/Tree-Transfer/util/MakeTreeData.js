@@ -31,7 +31,8 @@ export const convertTreeToArray = (treeData) => {
 export const convertArrayToTree = (dataArray) => {
 	let treeArray = _.cloneDeep(dataArray);
 	let treeData = mergeTreeData(separateData(treeArray));
-	return treeData;
+	// return treeData;
+	return makeTreeDisabledOrNot(treeData);
 }
 
 
@@ -245,6 +246,45 @@ export const compareInitData = (data, initData) => {
 			}
 		}
 		item.isNew = isNew ? true : false;
+		return item;
+	});
+}
+
+
+/**
+ * 整理Tree结构数据的disabled的属性
+ * @param {Array} treeData 
+ */
+export const makeTreeDisabledOrNot = (treeData = []) => {
+	const isAllDisabled = (array) => {
+		let is = true;
+		for(let i = 0; i < array.length; i++) {
+			if(!array[i].disabled) {
+				is = false;
+				break;
+			}
+		}
+		return is;
+	}
+	return treeData.map(item => {
+		let parentDisabled1 = true;
+		if(item.children) {
+			item.children.map(itn => {
+				if(parentDisabled1 && !itn.disabled) parentDisabled1 = false;
+				let parentDisabled2 = true;
+				if(itn.children) {
+					parentDisabled2 = isAllDisabled(itn.children);
+					makeTreeDisabledOrNot(itn.children);
+				} else {
+					parentDisabled2 = itn.disabled ? true : false;
+				}
+				itn.disabled = parentDisabled2;
+				return itn;
+			});
+		} else {
+			parentDisabled1 = item.disabled ? true : false;
+		}
+		item.disabled = parentDisabled1;
 		return item;
 	});
 }
