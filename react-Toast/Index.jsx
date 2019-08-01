@@ -55,7 +55,7 @@ export default {
   },
   hide() {
     if (toastInstance) {
-      toastInstance.fade('out', toastInstance.props.onClose);
+      toastInstance.fade(Animation.Out, toastInstance.props.onClose);
       toastInstance = null;
     }
   },
