@@ -1,8 +1,8 @@
-import raf from 'raf';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from './Icon';
 import { Animation, Type } from './Const';
+import { requestAnimationFrame } from './Raf'
 
 class Toast extends React.PureComponent {
   constructor(props) {
@@ -24,15 +24,13 @@ class Toast extends React.PureComponent {
   fade(type, callback) {
     let last = Date.now();
     const tick = () => {
-      const opacity = Number(this.ele.style.opacity);
-      this.ele.style.opacity = type === Animation.In ? (opacity + (Date.now() - last) / 400).toString() : (opacity - (Date.now() - last) / 400).toString();
-      last = Date.now();
-
-      if (
-        (type === Animation.In && +this.ele.style.opacity < 1) ||
-        (type === Animation.Out && +this.ele.style.opacity > 0)
-      ) {
-        raf(tick);
+      if (this.ele) {
+        const opacity = Number(this.ele.style.opacity);
+        this.ele.style.opacity = type === Animation.In ? (opacity + (Date.now() - last) / 400).toString() : (opacity - (Date.now() - last) / 400).toString();
+        last = Date.now();
+      }
+      if ((type === Animation.In && this.ele && +this.ele.style.opacity < 1) || (type === Animation.Out && this.ele && +this.ele.style.opacity > 0)) {
+        requestAnimationFrame(tick);
       } else {
         callback();
         this.isFadingIn = false;
@@ -45,7 +43,7 @@ class Toast extends React.PureComponent {
     if (type === Animation.Out && this.isFadingIn) {
       this.eventStacks.push({ type, callback });
     } else {
-      raf(tick);
+      requestAnimationFrame(tick);
     }
   }
 

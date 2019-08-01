@@ -2,10 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Toast from './Toast';
 import { Animation, Type } from './Const';
-import './toast.less';
+import './Toast.less';
 
 let toastInstance = null;
-
 function notice(type, { content, duration, onClose }) {
   if (toastInstance) {
     toastInstance.fade(Animation.Out, () => {
@@ -27,7 +26,17 @@ function notice(type, { content, duration, onClose }) {
         duration={duration}
         onClose={() => {
           ReactDOM.unmountComponentAtNode(container);
-          document.body.removeChild(container);
+          let bodyChildren = document.body.children;
+          let isHasChildren = false;
+          let toastNode = null;
+          for(let i = 0; i < bodyChildren.length; i++) {
+            if(bodyChildren[i].nodeName === 'DIV' && bodyChildren[i].className === 'react-toast' ) {
+              isHasChildren = true;
+              toastNode = bodyChildren[i];
+              break;
+            }
+          }
+          if(isHasChildren && toastNode) document.body.removeChild(toastNode);
           if (callback) {
             callback();
           }

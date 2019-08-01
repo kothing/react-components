@@ -1,3 +1,4 @@
+import React from 'react' 
 const iconTypes = {
   fail: (
     <svg viewBox="0 0 72 72">

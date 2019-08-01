@@ -6,14 +6,14 @@
 import Toast from './Toast';
 
 class Button extends React.Component {
-  handleClick = () => {
+  handleShowToast = () => {
     Toast.info('message...', 3000, () => {
       // do something after the toast disappears
     });
   };
 
   render() {
-    return <div onClick={this.handleClick}>btn</div>;
+    return <div onClick={this.handleShowToast}>btn</div>;
   }
 }
 ```
