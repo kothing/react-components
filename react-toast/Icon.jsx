@@ -15,7 +15,7 @@ const iconTypes = {
       </g>
     </svg>
   ),
-  loading: <div className="light-toast-loading" />,
+  loading: <div className="react-toast-loading" />,
   success: (
     <svg viewBox="0 0 72 72">
       <g fill="none" fillRule="evenodd">
