@@ -1,4 +1,4 @@
-# Light Toast
+# React Toast
 
 ## Usage
 
