@@ -59,13 +59,13 @@ class Toast extends React.PureComponent {
   render() {
     const { type, content } = this.props;
     return (
-      <div className="light-toast-mask">
+      <div className="react-toast-mask">
         <span
-          className={`light-toast-message${type === Type.Info ? '' : ' icon'}`}
+          className={`react-toast-message${type === Type.Info ? '' : ' icon'}`}
           ref={ref => this.ele = ref}
         >
           {type !== Type.Info && (
-            <div className="light-toast-icon-wrapper">
+            <div className="react-toast-icon-wrapper">
               <Icon type={type} />
             </div>
           )}
