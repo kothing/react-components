@@ -18,6 +18,7 @@ function notice(type, { content, duration, onClose }) {
 
   function render(callback) {
     const container = document.createElement('div');
+    container.className='react-toast';
     document.body.appendChild(container);
     const component = (
       <Toast
