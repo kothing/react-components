@@ -1,6 +1,6 @@
-import _ from 'lodash';
-import PropTypes from 'prop-types';
 import React, { cloneElement, Children, isValidElement, Fragment } from 'react';
+import PropTypes from 'prop-types';
+import _ from 'lodash';
 import { ALL_TRANSITIONS } from './consts';
 import Transition from './Transition';
 
