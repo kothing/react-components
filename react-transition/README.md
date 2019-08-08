@@ -1,6 +1,62 @@
 # ReactTransition
 A transition is an animation usually used to move content in or out of view.
 
+## Usage
+
+**Transition**
+
+A Transition animates a single child by toggling the the visible prop.
+```
+import React, { Component } from 'react'
+import { Transition } from './Transition';
+
+export default class TransitionExample extends Component {
+  state = { visible: true }
+
+  toggleVisibility = () => this.setState(prevState => ({ visible: !prevState.visible }))
+
+  render() {
+    const { visible } = this.state
+
+    return (
+      <div>
+        <button content={visible ? 'Hide' : 'Show'} onClick={this.toggleVisibility} />
+        <Transition visible={visible} animation='scale' duration={500}>
+          <Image size='small' src='/images/leaves/1.png' />
+        </Transition>
+      </div>
+    )
+  }
+}
+```
+
+**Transition Group**
+
+A Transition Group animates children as they mount and unmount.
+```
+import React, { Component } from 'react'
+import { Transition } from './Transition';
+
+export default class TransitionExample extends Component {
+  state = { visible: true }
+
+  toggleVisibility = () => this.setState(prevState => ({ visible: !prevState.visible }))
+
+  render() {
+    const { visible } = this.state
+
+    return (
+      <div>
+        <button content={visible ? 'Hide' : 'Show'} onClick={this.toggleVisibility} />
+        <Transition.Group animation='fade' duration={duration}>
+            {visible && <Image centered size='small' src='/images/leaves/4.png' />}
+        </Transition.Group>
+      </div>
+    )
+  }
+}
+```
+
 ## Transition
 A transition is an animation usually used to move content in or out of view. 
 
