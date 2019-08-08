@@ -1,7 +1,7 @@
+import React, { cloneElement, Component } from 'react';
+import PropTypes from 'prop-types';
 import cx from 'classnames';
 import _ from 'lodash';
-import PropTypes from 'prop-types';
-import { cloneElement, Component } from 'react';
 import { ALL_TRANSITIONS, DIRECTIONAL_TRANSITIONS } from './consts';
 import TransitionGroup from './TransitionGroup';
 import './transition.css';
