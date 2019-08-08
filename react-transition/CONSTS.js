@@ -24,6 +24,7 @@ export const DIRECTIONAL_TRANSITIONS = [
     'swing right',
     'zoom',
 ];
+
 export const STATIC_TRANSITIONS = [
     'jiggle', 
     'flash', 
@@ -33,7 +34,8 @@ export const STATIC_TRANSITIONS = [
     'bounce', 
     'glow'
 ];
+
 export const ALL_TRANSITIONS = [
-    ...DIRECTIONAL_TRANSITIONS, 
-    ...STATIC_TRANSITIONS
+    DIRECTIONAL_TRANSITIONS, 
+    STATIC_TRANSITIONS
 ];
