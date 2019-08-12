@@ -29,7 +29,7 @@ class Transfer extends Component {
 	 * 接收新的Props
 	 */
     componentWillReceiveProps(nextProps) {
-        if(!_.isEqual(this.props.leftTreeData, nextProps.leftTreeData) || !_.isEqual(this.props.rightTreeData, nextProps.rightTreeData)) {
+        if(!_.isEqual(this.props.leftTreeData, nextProps.leftTreeData) || nextProps.leftTreeData.length === 0 || !_.isEqual(this.props.rightTreeData, nextProps.rightTreeData) || nextProps.rightTreeData.length === 0) {
             this.setState({
                 leftTreeDataInit: nextProps.leftTreeData,
                 rightTreeDataInit: nextProps.rightTreeData,
