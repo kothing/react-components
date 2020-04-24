@@ -39,7 +39,7 @@ If you just want to add some simple styles, you can pass this prop to the compon
 
 Example:
 
-    <ScrollerbarBox style={{width: "100%", height: "100%"}}></FreeScrollerBar>
+    <ScrollerbarBox style={{width: "100%", height: "100%"}}></ScrollerbarBox>
 
 ### `fixed: boolean` optional
 
