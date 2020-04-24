@@ -2,7 +2,7 @@
 
 A react module for creating customizable scroll area.
 
-Visit [https://codesandbox.io/s/scrollbar-box-jhpwx](https://codesandbox.io/s/scrollbar-box-jhpwx) to see [demo](https://codesandbox.io/s/scrollbar-box-jhpwx).
+Visit [https://codesandbox.io/s/scrollbar-box-jhpwx](https://codesandbox.io/s/scrollbar-box-jhpwx) to see [demo](https://jhpwx.csb.app/).
 
 
 ## Usage
