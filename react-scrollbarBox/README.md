@@ -1,4 +1,4 @@
-# React-free-scrollbar
+# React-ScrollerbarBox
 
 A react module for creating customizable scroll area.
 
