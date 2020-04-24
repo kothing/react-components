@@ -4,7 +4,7 @@
 
 ## Demo
 
-### [codepen playground of similar project](https://codepen.io/ekeric13/project/full/DkJYpA/)
+### [codesandbox playground](https://codesandbox.io/s/react-starratings-kus6k)
 
 
 ## Usage
