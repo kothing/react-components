@@ -8,12 +8,11 @@
  * @length response string's length
  * @className canvas class name
  * @style response CSS Properties
- * @onChange=( value ) =>{} code change callback
+ * @onChange code change callback
+ * @onInputChange input value change callback
  */
 
-import React, { useRef, useEffect, useCallback, CSSProperties } from '@alipay/bigfish/react';
-
-// import React, { useRef, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback, CSSProperties, MutableRefObject } from 'react';
 import classnames from 'classnames';
 
 type LowerLetter = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z';
@@ -38,8 +37,12 @@ interface CaptchaProps {
   className?: string,
   // code change callback
   style?: CSSProperties,
+  // canvas ref
+  ref?: MutableRefObject<HTMLDivElement | null>
   // code change callback
-  onChange: (captcha: string) => void
+  onChange?: (captcha: string) => void
+  // code change callback
+  onInputChange?: (value: string, validation: boolean) => void
 }
 
 // warning
@@ -156,7 +159,12 @@ const Captcha: React.FC<CaptchaProps> = ({
   className = defaultProps.className,
   style = defaultProps.style,
   onChange,
+  onInputChange,
 }) => {
+  const [captchaValue, setCaptchaValue] = useState('');
+  const [inputValue, setInputValue] = useState('');
+  const [validation, setValidation] = useState(false);
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   // start draw
@@ -173,14 +181,20 @@ const Captcha: React.FC<CaptchaProps> = ({
         const newCode = drawTxt(ctx, length, txtArr, width, height);
         // draw line
         for (let i = 0; i < length; i += 1) {
-          drawLine(ctx, randomColor(0, 255), randomNum(0, width), randomNum(0, height), randomNum(0, width), randomNum(0, height));
+          drawLine(ctx, randomColor(180, 255), randomNum(0, width), randomNum(0, height), randomNum(0, width), randomNum(0, height));
         }
         // draw point
         for (let i = 0; i < width / length; i += 1) {
           drawPoint(ctx, randomColor(0, 255), randomNum(0, width), randomNum(0, height), 1, 0, 2 * Math.PI);
         }
+        
+        setCaptchaValue(newCode);
+        setValidation(inputValue === newCode.toLowerCase());
+
         // callback
-        onChange(newCode);
+        if (onChange) {
+          onChange(newCode);
+        }
       }
     } else {
       warning('Can not use canvas');
@@ -189,20 +203,54 @@ const Captcha: React.FC<CaptchaProps> = ({
     return true;
   }, []);
 
-  // effect
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [inputValue]);
+
   useEffect(() => {
     draw();
   }, []);
 
+  const inputOnChange = (e: any) => {
+    if (e.target.value.length <= length) {
+      setInputValue(e.target.value);
+      setValidation(e.target.value === captchaValue.toLowerCase());
+      if (onInputChange) {
+        onInputChange(e.target.value, e.target.value === captchaValue.toLowerCase());
+      }
+    } else {
+      setValidation(e.target.value.substr(0, length) === captchaValue.toLowerCase());
+      if (onInputChange) {
+        onInputChange(e.target.value.substr(0, length), e.target.value.substr(0, length) === captchaValue.toLowerCase());
+      }
+    }
+  };
+
   return (
-    <canvas
-      ref={canvasRef}
-      className={classnames('react-captcha', className)}
-      onClick={() => draw()}
-      style={style}
-      height={height}
-      width={width}
-    />
+    <div>
+      <input
+        type='text'
+        value={inputValue}
+        onChange={(e) => inputOnChange(e)}
+        ref={inputRef}
+      />
+      {inputValue.length === length
+        ? (validation
+          ? <span style={{ color: '#52c41a' }}>{inputValue !== '' ? 'True' : ''}</span>
+          : <span style={{ color: '#ff0000' }}>{inputValue !== '' ? 'False' : ''}</span>)
+        : ''
+      }
+      <canvas
+        ref={canvasRef}
+        className={classnames('react-captcha', className)}
+        onClick={() => draw()}
+        style={style}
+        height={height}
+        width={width}
+      />
+    </div>
   );
 }
 
