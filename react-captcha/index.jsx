@@ -81,7 +81,8 @@ const drawTxt = (ctx, length, txtArr, width, height) => {
     const txt = txtArr[randomNum(0, txtArr.length)];
     newCode += txt;
     // random font size
-    ctx.font = `${randomNum(height/1.5, height)}px SimHei`;
+    // ctx.font = `${randomNum(height/1.2, height)}px SimHei`;
+    ctx.font = `${randomNum(height/1.2, height)}px serif`;
     // random font color
     ctx.fillStyle = randomColor(50, 160);
     ctx.shadowOffsetX = randomNum(-3, 3);
@@ -136,7 +137,7 @@ const Captcha = ({
       const ctx = canvasRef.current.getContext('2d');
       if (ctx) {
         ctx.textBaseline = "middle";
-        ctx.fillStyle = randomColor(180, 240);
+        ctx.fillStyle = randomColor(220, 255);
         ctx.fillRect(0, 0, width, height);
         // switch type
         const txtArr = switchTypeAndSetStringToArray(type, numbers, letters);
@@ -144,7 +145,7 @@ const Captcha = ({
         const newCode = drawTxt(ctx, length, txtArr, width, height);
         // draw line
         for (let i = 0; i < length; i += 1) {
-          drawLine(ctx, randomColor(40, 180), randomNum(0, width), randomNum(0, height), randomNum(0, width), randomNum(0, height));
+          drawLine(ctx, randomColor(0, 255), randomNum(0, width), randomNum(0, height), randomNum(0, width), randomNum(0, height));
         }
         // draw point
         for (let i = 0; i < width / length; i += 1) {
