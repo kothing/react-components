@@ -282,16 +282,22 @@ const Captcha: React.FC<CaptchaProps> = ({
   };
 
   return (
-    <div>
-      <input type="text" value={inputValue} onChange={(e) => inputOnChange(e)} ref={inputRef} />
+    <div className={classnames('react-captcha', className)}>
+      <input
+        type="text"
+        value={inputValue}
+        onChange={(e) => inputOnChange(e)}
+        ref={inputRef}
+        className="captcha-input captcha-ui-input"
+      />
       {validTips()}
       <canvas
         ref={canvasRef}
-        className={classnames('react-captcha', className)}
         onClick={() => draw()}
         style={style}
         height={height}
         width={width}
+        className="captcha-canvas"
       />
     </div>
   );
