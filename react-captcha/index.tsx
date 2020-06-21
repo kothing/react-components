@@ -62,7 +62,7 @@ const warning = (message: any) => {
 
 // switch type
 const switchTypeAndSetStringToArray = (type: string, numbers: any[], letters: any[]) => {
-  let txtArr = [];
+  let txtArr: any[] = [];
   switch (type) {
     case 'blend':
       txtArr = numbers.concat(letters);
