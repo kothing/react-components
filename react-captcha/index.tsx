@@ -184,7 +184,7 @@ const Captcha: React.FC<CaptchaProps> = ({
   style = defaultProps.style,
   onChange,
   onInputChange,
-}) => {
+}: CaptchaProps) => {
   const [captchaValue, setCaptchaValue] = useState('');
   const [inputValue, setInputValue] = useState('');
   const [validation, setValidation] = useState(false);
