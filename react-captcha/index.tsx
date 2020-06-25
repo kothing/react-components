@@ -16,8 +16,60 @@ import React, { useRef, useState, useEffect, useCallback, CSSProperties, Mutable
 import classnames from 'classnames';
 import './style.css';
 
-type LowerLetter = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z';
-type UpperLetter = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z';
+type LowerLetter =
+  | 'a'
+  | 'b'
+  | 'c'
+  | 'd'
+  | 'e'
+  | 'f'
+  | 'g'
+  | 'h'
+  | 'i'
+  | 'j'
+  | 'k'
+  | 'l'
+  | 'm'
+  | 'n'
+  | 'o'
+  | 'p'
+  | 'q'
+  | 'r'
+  | 's'
+  | 't'
+  | 'u'
+  | 'v'
+  | 'w'
+  | 'x'
+  | 'y'
+  | 'z';
+type UpperLetter =
+  | 'A'
+  | 'B'
+  | 'C'
+  | 'D'
+  | 'E'
+  | 'F'
+  | 'G'
+  | 'H'
+  | 'I'
+  | 'J'
+  | 'K'
+  | 'L'
+  | 'M'
+  | 'N'
+  | 'O'
+  | 'P'
+  | 'Q'
+  | 'R'
+  | 'S'
+  | 'T'
+  | 'U'
+  | 'V'
+  | 'W'
+  | 'X'
+  | 'Y'
+  | 'Z';
 type Letter = LowerLetter | UpperLetter;
 type CodeType = 'blend' | 'number' | 'letter';
 
@@ -129,10 +181,10 @@ const drawTxt = (
   width: number,
   height: number,
 ) => {
-  let newCode = '';
+  let captchaTxt = '';
   for (let i = 1; i <= length; i += 1) {
     const txt = txtArr[randomNum(0, txtArr.length)];
-    newCode += txt;
+    captchaTxt += txt;
     // random font size
     // ctx.font = `${randomNum(height / 1.2, height)}px SimHei`;
     ctx.font = `${randomNum(height / 1.2, height)}px serif`;
@@ -153,7 +205,7 @@ const drawTxt = (
     ctx.rotate((-deg * Math.PI) / 180);
     ctx.translate(-x, -y);
   }
-  return newCode;
+  return captchaTxt;
 };
 
 // default props
@@ -202,7 +254,7 @@ const Captcha: React.FC<CaptchaProps> = ({
         // switch type
         const txtArr = switchTypeAndSetStringToArray(type, numbers, letters);
         // draw txt
-        const newCode = drawTxt(ctx, length, txtArr, width, height);
+        const captchaValue = drawTxt(ctx, length, txtArr, width, height);
         // draw line
         for (let i = 0; i < length; i += 1) {
           drawLine(
@@ -216,31 +268,21 @@ const Captcha: React.FC<CaptchaProps> = ({
         }
         // draw point
         for (let i = 0; i < width / length; i += 1) {
-          drawPoint(
-            ctx,
-            randomColor(0, 255),
-            randomNum(0, width),
-            randomNum(0, height),
-            1,
-            0,
-            2 * Math.PI,
-          );
+          drawPoint(ctx, randomColor(0, 255), randomNum(0, width), randomNum(0, height), 1, 0, 2 * Math.PI);
         }
-
-        setCaptchaValue(newCode);
-        setValidation(inputValue === newCode.toLowerCase());
-
+        // set captcha value
+        setCaptchaValue(captchaValue);
+        // set validation
+        setValidation(inputValue === captchaValue.toLowerCase());
         // callback
         if (onChange) {
-          onChange(newCode);
+          onChange(captchaValue);
         }
       }
     } else {
       warning('Can not use canvas');
-      return false;
     }
-    return true;
-  }, [width, height, type, numbers, letters, length, inputValue, onChange]);
+  }, []);
 
   useEffect(() => {
     if (inputRef.current) {
