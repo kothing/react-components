@@ -27,11 +27,11 @@ interface CaptchaProps {
   // canvas height
   height?: number;
   // response validate code
-  type?: CodeType;
+  type?: CodeType | string;
   // [0-9]
   numbers?: number[];
   // [a-z,A-Z]
-  letters?: Letter[];
+  letters?: Letter[] | string[];
   // response string's length
   length?: number;
   // canvas class name
@@ -240,7 +240,7 @@ const Captcha: React.FC<CaptchaProps> = ({
       return false;
     }
     return true;
-  }, []);
+  }, [width, height, type, numbers, letters, length, inputValue, onChange]);
 
   useEffect(() => {
     if (inputRef.current) {
@@ -250,7 +250,7 @@ const Captcha: React.FC<CaptchaProps> = ({
 
   useEffect(() => {
     draw();
-  }, []);
+  }, [draw]);
 
   const inputOnChange = (e: any) => {
     if (e.target.value.length <= length) {
