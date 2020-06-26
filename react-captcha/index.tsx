@@ -211,17 +211,16 @@ const drawTxt = (
 };
 
 // custom hook
-const useRefCallback = (fn: () => void, dependencies: any) => {
-  const ref = useRef(fn);
-  useEffect(() => {
-    ref.current = fn;
-  }, [fn, ...dependencies]);
-
-  return useCallback(() => {
-    const fn = ref.current;
-    return fn();
-  }, [ref]);
-};
+// const useRefCallback = (fn: () => void, dependencies: any) => {
+//   const ref = useRef(fn);
+//   useEffect(() => {
+//     ref.current = fn;
+//   }, [fn, ...dependencies]);
+//   return useCallback(() => {
+//     const fn = ref.current;
+//     return fn();
+//   }, [ref]);
+// };
 
 // default props
 const defaultProps = {
@@ -261,7 +260,7 @@ const Captcha: React.FC<CaptchaProps> = ({
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   // start draw
-  const draw = useRefCallback(() => {
+  const draw = useCallback(() => {
     if (canvasRef.current) {
       const ctx = canvasRef.current.getContext('2d');
       if (ctx) {
