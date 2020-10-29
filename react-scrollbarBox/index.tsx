@@ -91,7 +91,7 @@ export type StartOption = '' | 'bottom' | 'right' | 'bottom right' | { top: numb
 
 export interface Props {
   className?: string;
-  style?: object;
+  style?: Record<string, unknown>;
   fixed?: boolean;
   autohide?: boolean;
   timeout?: number;
