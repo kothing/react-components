@@ -39,7 +39,7 @@ Button.defaultProps = {
 Button.propTypes = {
   type: PropTypes.oneOf(['default', 'primary', 'outline']),
   size: PropTypes.oneOf(['large', 'default', 'small']),
-  children: PropTypes.string,
+  children: PropTypes.any,
   onClick: PropTypes.func
 };
 
