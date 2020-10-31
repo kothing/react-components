@@ -6,7 +6,7 @@ const AudioPage = () => {
     <div className="demoBox">
       <h3>音频播放器</h3>
       <AudioPlayer
-        src="https://github.com/kothing/kothing.github.io/blob/master/assets/audio/See-You-Again.mp3?raw=true"
+        src="https://kothing.github.io/assets/audio/See-You-Again.mp3"
         autoPlay
         loop
         title="audio player"
