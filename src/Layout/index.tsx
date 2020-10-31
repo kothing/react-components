@@ -25,9 +25,14 @@ const Layout: LayoutPropsType = ({ className, style, children }) => {
   const childHeader: any = useMemo(() => {
     return (
       Array.isArray(children) &&
-      children.filter(
-        (item: any) => item?.props?.children?.type === "header"
-      )[0]
+      children.filter((item: any) => new item.type().name === "Header")[0]
+    );
+  }, [children]);
+
+  const childFooter: any = useMemo(() => {
+    return (
+      Array.isArray(children) &&
+      children.filter((item: any) => new item.type().name === "Footer")[0]
     );
   }, [children]);
 
@@ -40,14 +45,17 @@ const Layout: LayoutPropsType = ({ className, style, children }) => {
       }${className ? ` ${className}` : ""}`}
       style={style}
     >
-      {childHeader ? (
+      {childHeader || childFooter ? (
         <>
           {childHeader}
           <main className={`${WrapperClassName}-main`}>
             {children?.filter(
-              (item: any) => item?.props?.children?.type !== "header"
+              (item: any) =>
+                new item.type().name !== "Header" &&
+                new item.type().name !== "Footer"
             )}
           </main>
+          {childFooter}
         </>
       ) : (
         children

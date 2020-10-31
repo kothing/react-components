@@ -12,6 +12,7 @@ interface PropsType {
 interface StateType {}
 
 class Sider extends Component<PropsType, StateType> {
+  public name: string = "Sider";
   render() {
     const { className, style, children } = this.props;
     return (

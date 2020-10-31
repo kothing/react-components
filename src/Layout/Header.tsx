@@ -13,6 +13,7 @@ interface PropsType {
 interface StateType {}
 
 class Header extends Component<PropsType, StateType> {
+  public name: string = "Header";
   state: StateType = {};
 
   static defaultProps = {

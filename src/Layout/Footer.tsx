@@ -12,6 +12,7 @@ interface PropsType {
 interface StateType {}
 
 class Footer extends Component<PropsType, StateType> {
+  public name: string = "Footer";
   render() {
     const { className, style, children } = this.props;
     return (
