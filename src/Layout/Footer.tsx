@@ -1,4 +1,4 @@
-import React, { FC, CSSProperties, ReactNode } from "react";
+import React, { Component, CSSProperties, ReactNode } from "react";
 import { WrapperClassName } from "./index";
 
 /**
@@ -9,17 +9,22 @@ interface PropsType {
   children?: ReactNode;
   style?: CSSProperties;
 }
-const Footer: FC<PropsType> = ({ className, style, children }) => {
-  return (
-    <div
-      className={`${WrapperClassName}-footer${
-        className ? ` ${className}` : ""
-      }`}
-      style={style}
-    >
-      {children}
-    </div>
-  );
-};
+interface StateType {}
+
+class Footer extends Component<PropsType, StateType> {
+  render() {
+    const { className, style, children } = this.props;
+    return (
+      <div
+        className={`${WrapperClassName}-footer${
+          className ? ` ${className}` : ""
+        }`}
+        style={style}
+      >
+        {children}
+      </div>
+    );
+  }
+}
 
 export default Footer;
