@@ -26,7 +26,7 @@ const Layout: LayoutPropsType = ({ className, style, children }) => {
     return (
       Array.isArray(children) &&
       children.filter(
-        (item: any) => item && item.type && item.type.name === "Header"
+        (item: any) => item?.props?.children?.type === "header"
       )[0]
     );
   }, [children]);
@@ -37,7 +37,7 @@ const Layout: LayoutPropsType = ({ className, style, children }) => {
         childHeader
           ? ` has-header${childHeader.props.fixed ? " fixed-header" : ""}`
           : ""
-      } ${className || ""}`}
+      }${className ? ` ${className}` : ""}`}
       style={style}
     >
       {childHeader ? (
@@ -45,7 +45,7 @@ const Layout: LayoutPropsType = ({ className, style, children }) => {
           {childHeader}
           <main className={`${WrapperClassName}-main`}>
             {children?.filter(
-              (item: any) => item && item.type && item.type.name !== "Header"
+              (item: any) => item?.props?.children?.type !== "header"
             )}
           </main>
         </>
