@@ -1,0 +1,98 @@
+html,
+body {
+  height: 100%;
+  overflow: auto;
+  margin: 0;
+}
+
+.App {
+  text-align: left;
+}
+
+.app-header {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+}
+
+.app-menu {
+  list-style: none;
+  padding: 0;
+}
+
+.app-menu li {
+  height: 40px;
+  line-height: 40px;
+}
+
+.app-menu li a {
+  display: inline-block;
+  position: relative;
+  padding-left: 15%;
+  width: 100%;
+  text-decoration: none;
+}
+
+.app-menu li a:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  border-left: 2px solid #09d3ac;
+  -webkit-transform: scaleY(0.0001);
+  transform: scaleY(0.0001);
+  opacity: 0;
+  -webkit-transition: opacity 0.15s cubic-bezier(0.215, 0.61, 0.355, 1),
+    -webkit-transform 0.15s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: opacity 0.15s cubic-bezier(0.215, 0.61, 0.355, 1),
+    -webkit-transform 0.15s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: transform 0.15s cubic-bezier(0.215, 0.61, 0.355, 1),
+    opacity 0.15s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: transform 0.15s cubic-bezier(0.215, 0.61, 0.355, 1),
+    opacity 0.15s cubic-bezier(0.215, 0.61, 0.355, 1),
+    -webkit-transform 0.15s cubic-bezier(0.215, 0.61, 0.355, 1);
+  content: "";
+}
+
+.app-menu li a.active {
+  color: #09d3ac;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.app-menu li a.active:before {
+  -webkit-transform: scaleY(1);
+  transform: scaleY(1);
+  opacity: 1;
+  -webkit-transition: opacity 0.15s cubic-bezier(0.645, 0.045, 0.355, 1),
+    -webkit-transform 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: opacity 0.15s cubic-bezier(0.645, 0.045, 0.355, 1),
+    -webkit-transform 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: transform 0.15s cubic-bezier(0.645, 0.045, 0.355, 1),
+    opacity 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: transform 0.15s cubic-bezier(0.645, 0.045, 0.355, 1),
+    opacity 0.15s cubic-bezier(0.645, 0.045, 0.355, 1),
+    -webkit-transform 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.app-main {
+  position: relative;
+  padding: 24px 24px;
+}
+
+.app-link {
+  color: #1c1e21;
+}
+
+a {
+  color: #1c1e21;
+  -webkit-transition: color 0.3s ease;
+  transition: color 0.3s ease;
+}
+
+a:active,
+a:hover {
+  color: #09d3ac;
+}
