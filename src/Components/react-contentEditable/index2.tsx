@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
-import styles from './styles.less';
+import styles from './styles.css';
 
 interface EditingProps {
   content: string;
