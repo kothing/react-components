@@ -4,4 +4,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Usage
 
-Demo [https://react-app-components.now.sh/](https://react-app-components.now.sh/)
+Demo [https://react-components-x.netlify.app/](https://react-components-x.netlify.app/)
